@@ -20,6 +20,9 @@ router.post("/register", async (req, res) => {
         const user = new User({ name, email });
         if (parentId) {
             const parent = await User.findById(parentId);
+            if (parent.status !== 'active') {
+                return res.status(400).json({ error: "Parent user is inactive and cannot refer others" });
+            }
             if (parent && parent.referrals.length < 8) {
                 user.parent = parent._id;
                 user.level = parent.level + 1;
@@ -63,6 +66,17 @@ router.get("/:userId/earnings-report", async (req, res) => {
         res.json({ userId, totalEarnings, directEarnings, indirectEarnings, earnings });
     } catch (error) {
         res.status(500).json({ error: error.message });
+    }
+});
+
+
+router.patch("/:userId/status", async (req, res) => {
+    const { status } = req.body;
+    try {
+        const user = await User.findByIdAndUpdate(req.params.userId, { status }, { new: true });
+        res.json(user);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 });
 

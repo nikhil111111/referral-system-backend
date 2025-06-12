@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
             return res.status(404).json({ error: "User not found" });
         }
 
-        if (buyer.parent) {
+        if (buyer.parent && buyer.parent.status === 'active') {
             const directEarning = new Earning({
                 user: buyer.parent._id,
                 amount: amount * 0.05,
@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
             });
         }
 
-        if (buyer.parent && buyer.parent.parent) {
+        if (buyer.parent && buyer.parent.parent && buyer.parent.parent.status === 'active') {
             const indirectEarning = new Earning({
                 user: buyer.parent.parent,
                 amount: amount * 0.01,

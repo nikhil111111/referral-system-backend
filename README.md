@@ -14,6 +14,10 @@ This project is a backend system built using **Node.js**, designed to handle mul
 - Provides real-time notifications to parents when earnings are generated.
 - Includes a reporting API to check how much a user has earned (both direct and indirect).
 
+- EDGE CASE
+  1. Inactive users cannot refer others or receive profit.
+  2. Admins can change a user’s status to inactive using the PATCH endpoint.
+
 ---
 
 ## Technologies Used
@@ -42,10 +46,11 @@ This project is a backend system built using **Node.js**, designed to handle mul
 
 ## 📸 Screenshots
 
-![Register](./screenshots/register_user_ss.jpg)
+![Register](./screenshots/register_user_ss.png)
 ![Purchase](./screenshots/purchase_ss.jpg)
 ![Report](./screenshots/earning_report_ss.jpg)
-![database](./screenshots/database_ss.jpg)
+![database](./screenshots/database_ss.png)
+![edgecasess](./screenshots/edgecase.png)
 
 ## Created By
 
